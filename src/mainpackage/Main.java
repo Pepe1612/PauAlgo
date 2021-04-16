@@ -1,13 +1,16 @@
 package mainpackage;
 
+import kaprekar.TestFive;
+import missingnum.TestThree;
+import order.TestFour;
+import spot.TestTwo;
 import sort.*;
-import tests.*;
 
 public class Main {
 
     public static void main(String[] args) {
         //zad1
-        TestOne testOne = new TestOne(new QuickSort());
+        TestOne testOne = new TestOne(new BubbleSort());
         testOne.printResult();
 
         //zad2

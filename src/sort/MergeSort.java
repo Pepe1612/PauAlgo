@@ -1,34 +1,9 @@
 package sort;
 
-import java.util.Random;
-
-public class MergeSort implements Strategy {
-
-    private double[] array;
-    private double[] optArray;
-    private double[] pesArray;
-
-    public MergeSort() {
-        array = new double[size];
-        optArray = new double[size];
-        pesArray = new double[size];
-        setArrays();
-    }
+public class MergeSort extends SortingAlgorithm {
 
     @Override
-    public double sortTime(double[] array) {
-        double tStart = System.currentTimeMillis();
-
-        sort(array);
-
-        double tEnd = System.currentTimeMillis();
-        double result = tEnd - tStart;
-        result /= 1000.0;
-        return result;
-    }
-
-    @Override
-    public void sort(double[] array) {
+    protected void sort(double[] array) {
         int left = 0;
         int right = array.length - 1;
         mergeSort(array, left, right);
@@ -76,7 +51,7 @@ public class MergeSort implements Strategy {
         }
     }
 
-    private void mergeSort(double arr[], int left, int right) {
+    private void mergeSort(double[] arr, int left, int right) {
         if (left < right) {
             int m = left + (right - left) / 2;
             mergeSort(arr, left, m);
@@ -84,27 +59,4 @@ public class MergeSort implements Strategy {
             merge(arr, left, m, right);
         }
     }
-
-    @Override
-    public void printResult() {
-        System.out.println("----MergeSort----");
-        System.out.println("realistic time: " + sortTime(array));
-        System.out.println("optimistic time: " + sortTime(optArray));
-        System.out.println("pessimistic time: " + sortTime(pesArray));
-    }
-
-    public void setArrays() {
-        Random random = new Random();
-        for ( int i = 0; i<size; i++){
-            array[i] = random.nextInt(size / 2);
-        }
-        for (int i = size - 1; i >= 0; i--) {
-            optArray[i] = i + 1;
-        }
-        for (int i = size - 1, j = 1; i >= 0; i--, j++) {
-            pesArray[i] = j;
-        }
-    }
-
-
 }

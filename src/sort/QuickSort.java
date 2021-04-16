@@ -1,34 +1,9 @@
 package sort;
 
-import java.util.Random;
-
-public class QuickSort implements Strategy {
-
-    private double[] array;
-    private double[] optArray;
-    private double[] pesArray;
-
-    public QuickSort() {
-        array = new double[size];
-        optArray = new double[size];
-        pesArray = new double[size];
-        setArrays();
-    }
+public class QuickSort extends SortingAlgorithm {
 
     @Override
-    public double sortTime(double[] array) {
-        double tStart = System.currentTimeMillis();
-
-        sort(array);
-
-        double tEnd = System.currentTimeMillis();
-        double result = tEnd - tStart;
-        result /= 1000.0;
-        return result;
-    }
-
-    @Override
-    public void sort(double[] array) {
+    protected void sort(double[] array) {
         int low = 0;
         int high = array.length - 1;
         quickSort(array, low, high);
@@ -58,27 +33,6 @@ public class QuickSort implements Strategy {
             int pi = partition(arr, low, high);
             quickSort(arr, low, pi - 1);
             quickSort(arr, pi + 1, high);
-        }
-    }
-
-    @Override
-    public void printResult() {
-        System.out.println("----QuickSort----");
-        System.out.println("realistic time: " + sortTime(array));
-        System.out.println("optimistic time: " + sortTime(optArray));
-        System.out.println("pessimistic time: " + sortTime(pesArray));
-    }
-
-    public void setArrays() {
-        Random random = new Random();
-        for ( int i = 0; i<size; i++){
-            array[i] = random.nextInt(size / 2);
-        }
-        for (int i = size - 1; i >= 0; i--) {
-            pesArray[i] = i + 1;
-        }
-        for (int i = size - 1, j = 1; i >= 0; i--, j++) {
-            optArray[i] = j;
         }
     }
 }
